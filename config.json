@@ -1,9 +1,9 @@
 {
-  "room_name": "",
-  "room_id": "",
-  "client": "192.168.84.87",
+  "room_name": "516",
+  "room_id": "6502",
+  "client": "192.168.84.1",
   "interval_day": 14,
-  "remind_daily": false,
-  "server_chan_key": "",
-  "remind_time": 9
+  "remind_daily": true,
+  "server_chan_key": "https://sctapi.ftqq.com/SCT211848Tsj63160gHRRHu66ldL1gQ9fC.send",
+  "remind_time": 1
 }

@@ -1,5 +1,6 @@
 import requests
-import time
+from datetime import datetime
+from datetime import timedelta
 
 
 # 使用 Server酱 发送电量数据至微信
@@ -12,10 +13,11 @@ def send(key_url: str, data: list):
 def handle(data: list, describe: str):
     # 标题
     text = ''
-    cur_date = time.strftime("%Y-%m-%d", time.localtime())
-    if data[-1]['date'] == cur_date:
+    #实际上最多获取到前一天的
+    cur_date = (datetime.now()-timedelta(days=1)).strftime("%Y-%m-%d")
+    if data[0]['date'] == cur_date:
         text = '昨日用电{:.2f}度，今日可用{:.2f}度'.format(
-            data[-2]['cost'], data[-1]['rest'])
+            data[0]['cost'], data[0]['rest'])
     else:
         text = '数据未更新(￣_￣|||)'
 

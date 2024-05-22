@@ -71,12 +71,14 @@ def processingData(table_data: list):
     data = []
     day_num = len(table_data)
 
+    # 修正当日用电量算法，之前的的方法中实际上计算的是前一天的用电量，正确的算法应该是
+    # 当日用电量=前一天结束时剩余电量-当天结束时剩余电量
     # 日期 | 当日用电量
-    for i in range(day_num - 1):
-        charge = table_data[i + 1][3] - table_data[i][3]
+    for i in range(1,day_num):
+        charge = table_data[i][3] - table_data[i-1][3]
         data.append({
             'date': table_data[i][0],
-            'cost': table_data[i][1] - table_data[i + 1][1],
+            'cost': table_data[i - 1][1]-table_data[i][1],
             'rest': table_data[i][1],
             'charge': charge
         })
@@ -85,14 +87,17 @@ def processingData(table_data: list):
         else:
             data[-1]['charge'] = '-'  # 没充电费
 
+    # 实际上查询的时候只能查询到前一天的，没有必要去单独赋值
     # 最后一天需要单独赋值
-    data.append({
-        'date': table_data[day_num - 1][0],
-        'cost': '-',
-        'rest': table_data[day_num - 1][1],
-        'charge': '-'
-    })
+    # data.append({
+    #     'date': table_data[day_num - 1][0],
+    #     'cost': '-',
+    #     'rest': table_data[day_num - 1][1],
+    #     'charge': '-'
+    # })
 
+    # 倒序显示
+    data.reverse()
     return data
 
 
