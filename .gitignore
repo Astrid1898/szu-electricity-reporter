@@ -1,6 +1,7 @@
 # my ignore
 # config.json
 config.json.tmp
+run_back.exe
 .vscode/
 
 # Byte-compiled / optimized / DLL files
